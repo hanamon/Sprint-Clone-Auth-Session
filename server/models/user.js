@@ -13,23 +13,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      id: {
-        type: DataTypes.NUMBER,
-        primaryKey: true,
-      },
       userId: {
         type: DataTypes.STRING
       },
-      password: {
-        tyep: DataTypes.STRING
-      },
       email: {
-        tyep: DataTypes.STRING
+        type: DataTypes.STRING
+      },
+      password: {
+        type: DataTypes.STRING
       }
     },
     {
       sequelize,
-      modelName: 'Users',
+      modelName: 'User',
     }
   );
   return User;

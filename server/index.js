@@ -1,8 +1,9 @@
 require('dotenv').config();
-const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
 const morgan = require('morgan');
+const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const https = require('https');
 const usersRouter = require('./routes/user');
@@ -11,6 +12,7 @@ const app = express();
 
 // 미들웨어
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
@@ -39,8 +41,8 @@ app.use('/users', usersRouter);
 const server = https
   .createServer(
     {
-      key: fs.readFileSync(__dirname, '/key.pem', 'utf-8'),
-      cert: fs.readFileSync(__dirname, '/cert.pem', 'utf-8')
+      key: fs.readFileSync(__dirname + '/key.pem', 'utf-8'),
+      cert: fs.readFileSync(__dirname + '/cert.pem', 'utf-8')
     },
     app
   )
